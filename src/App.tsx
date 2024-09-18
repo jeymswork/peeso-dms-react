@@ -18,7 +18,6 @@ function App() {
       const response = await axios.get('http://localhost:3000/employee/protected', { headers: {'Authorization': token}});
       console.log(token)
       setAuthenticationValid(response.data.authenticationValid)
-      console.log(response.data.message)
       console.log(response.data)
     }
     checkAuthentication()
