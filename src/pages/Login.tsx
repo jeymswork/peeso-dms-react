@@ -4,12 +4,9 @@ import wave from '../assets/wave-bg.svg'
 import axios from 'axios'
 import { useState } from 'react'
 import Loading from '../components/Loading'
-import { LoginContext } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
-    const {setAccountDetails} = useContext(LoginContext)
 
     const [employeeId, setEmployeeId] = useState('');
     const [password, setPassword] = useState('');
@@ -25,7 +22,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:3000/employee/login', { employeeId, password});
             localStorage.setItem('token', response.data.token);
-            setAccountDetails(response.data.accountDetails)
+            localStorage.setItem('accountDetails', JSON.stringify(response.data.accountDetails))
             navigate('/dashboard')
         } 
         catch (err) {
